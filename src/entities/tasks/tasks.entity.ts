@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { StatusEnum } from 'src/enums/status.enum';
+import { StatusEnum } from '../../enums/status.enum';
 
 @Entity({
   name: 'tasks',
