@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { Response } from 'express';
 
 import { TasksService } from './tasks.service';
@@ -18,5 +26,11 @@ export class TasksController {
   async create(@Res() response: Response, @Body() payload: CreateTaskDto) {
     const task = await this.tasksService.create(payload);
     return response.status(201).json(task);
+  }
+
+  @Delete(':id')
+  async delete(@Res() response: Response, @Param('id') id: string) {
+    await this.tasksService.delete(id);
+    return response.status(200).json({ message: 'Task deleted successfully' });
   }
 }
