@@ -20,7 +20,6 @@ export default <TypeOrmModuleAsyncOptions>{
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_DATABASE'),
       entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-      extra: { ssl: true },
       synchronize: true,
     };
   },
