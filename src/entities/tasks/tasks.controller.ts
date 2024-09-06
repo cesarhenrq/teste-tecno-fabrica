@@ -12,8 +12,6 @@ import { Response } from 'express';
 
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from 'src/dtos/tasks/create-task.dto';
-import { Validate } from 'class-validator';
-import { StatusEnum } from 'src/enums/status.enum';
 import { UpdateTaskDto } from 'src/dtos/tasks/update-task.dto';
 
 @Controller('tasks')
