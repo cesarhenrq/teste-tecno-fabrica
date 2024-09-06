@@ -11,8 +11,8 @@ import {
 import { Response } from 'express';
 
 import { TasksService } from './tasks.service';
-import { CreateTaskDto } from 'src/dtos/tasks/create-task.dto';
-import { UpdateTaskDto } from 'src/dtos/tasks/update-task.dto';
+import { CreateTaskDto } from '../../dtos/tasks/create-task.dto';
+import { UpdateTaskDto } from '../../dtos/tasks/update-task.dto';
 
 @Controller('tasks')
 export class TasksController {
