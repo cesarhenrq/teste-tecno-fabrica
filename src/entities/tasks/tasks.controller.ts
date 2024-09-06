@@ -1,7 +1,9 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 
 import { TasksService } from './tasks.service';
+import { CreateTaskDto } from 'src/dtos/tasks/create-task.dto';
+import { Validate } from 'class-validator';
 
 @Controller('tasks')
 export class TasksController {
@@ -10,5 +12,11 @@ export class TasksController {
   @Get()
   async findAll(@Res() response: Response) {
     return response.status(200).json(await this.tasksService.findAll());
+  }
+
+  @Post()
+  async create(@Res() response: Response, @Body() payload: CreateTaskDto) {
+    const task = await this.tasksService.create(payload);
+    return response.status(201).json(task);
   }
 }
