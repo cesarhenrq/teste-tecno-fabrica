@@ -11,7 +11,7 @@ import { StatusEnum } from 'src/enums/status.enum';
 @Entity({
   name: 'tasks',
 })
-export class Tasks {
+export class Task {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
