@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Res,
 } from '@nestjs/common';
@@ -12,6 +13,8 @@ import { Response } from 'express';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from 'src/dtos/tasks/create-task.dto';
 import { Validate } from 'class-validator';
+import { StatusEnum } from 'src/enums/status.enum';
+import { UpdateTaskDto } from 'src/dtos/tasks/update-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -32,5 +35,16 @@ export class TasksController {
   async delete(@Res() response: Response, @Param('id') id: string) {
     await this.tasksService.delete(id);
     return response.status(200).json({ message: 'Task deleted successfully' });
+  }
+
+  @Patch(':id/status')
+  async updateStatus(
+    @Res() response: Response,
+    @Param('id') id: string,
+    @Body() payload: UpdateTaskDto,
+  ) {
+    const { status } = payload;
+    const task = await this.tasksService.updateStatus(id, status);
+    return response.status(200).json(task);
   }
 }
