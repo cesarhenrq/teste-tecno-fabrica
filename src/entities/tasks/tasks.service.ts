@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 
 import { Task } from './tasks.entity';
 import { CreateTaskDto } from 'src/dtos/tasks/create-task.dto';
+import { StatusEnum } from 'src/enums/status.enum';
 
 @Injectable()
 export class TasksService {
@@ -31,5 +32,19 @@ export class TasksService {
     }
 
     await this.tasksRepository.delete(id);
+  }
+
+  async updateStatus(id: string, status: StatusEnum): Promise<Task> {
+    const taskToUpdate = await this.tasksRepository.findOne({
+      where: { id },
+    });
+
+    if (!taskToUpdate) {
+      throw new NotFoundException(`Task with ID ${id} not found`);
+    }
+
+    taskToUpdate.status = status;
+
+    return this.tasksRepository.save(taskToUpdate);
   }
 }
